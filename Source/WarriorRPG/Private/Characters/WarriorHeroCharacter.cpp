@@ -12,6 +12,9 @@
 #include "DataAssets/Input/DataAsset_InputConfig.h"
 #include "Components/Input/WarriorInputComponent.h"
 #include "WarriorGameplayTags.h"
+#include "WarriorDebugHelper.h"
+#include "AbilitySystem/WarriorAbilitySystemComponent.h"
+#include "AbilitySystem/WarriorAttributeSet.h"
 
 AWarriorHeroCharacter::AWarriorHeroCharacter()
 {
@@ -41,7 +44,6 @@ AWarriorHeroCharacter::AWarriorHeroCharacter()
 void AWarriorHeroCharacter::BeginPlay()
 {
     Super::BeginPlay();
-    Debug::Print("Warrior Hero Character is ready to fight!", FColor::Green, 0);
 }
 void AWarriorHeroCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
 {
@@ -88,5 +90,17 @@ void AWarriorHeroCharacter::Input_Look(const FInputActionValue &InputActionValue
     if (LookAxisVector.Y != 0.f)
     {
         AddControllerPitchInput(LookAxisVector.Y);
+    }
+}
+
+void AWarriorHeroCharacter::PossessedBy(AController *NewController)
+{
+    Super::PossessedBy(NewController);
+    if (WarriorAbilitySystemComponent && WarriorAttributeSet)
+    {
+        const FString ASCText = FString::Printf(TEXT("Owner Actor: %s, AvatarActor: %s"), *WarriorAbilitySystemComponent->GetOwnerActor()->GetActorLabel(), *WarriorAbilitySystemComponent->GetAvatarActor()->GetActorLabel());
+
+        Debug::Print(TEXT("Ability system component valid. ") + ASCText, FColor::Green);
+        Debug::Print(TEXT("AttributeSet valid. ") + ASCText, FColor::Green);
     }
 }

@@ -18,8 +18,6 @@ class WARRIORRPG_API AWarriorHeroCharacter : public AWarriorBaseCharacter
 
 public:
 	AWarriorHeroCharacter();
-	virtual void BeginPlay() override;
-	virtual void SetupPlayerInputComponent(class UInputComponent *PlayerInputComponent) override;
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
@@ -33,4 +31,12 @@ private:
 
 	void Input_Move(const FInputActionValue &InputActionValue);
 	void Input_Look(const FInputActionValue &InputActionValue);
+
+protected:
+	//~ Begin APawn Interface.
+	virtual void PossessedBy(AController *NewController) override;
+	//~ End APawn Interface
+
+	virtual void BeginPlay() override;
+	virtual void SetupPlayerInputComponent(class UInputComponent *PlayerInputComponent) override;
 };
