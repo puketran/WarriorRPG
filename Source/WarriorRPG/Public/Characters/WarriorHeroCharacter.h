@@ -7,6 +7,10 @@
 #include "WarriorHeroCharacter.generated.h"
 
 struct FInputActionValue;
+class UHeroCombatComponent;
+class USpringArmComponent;
+class UCameraComponent;
+class UDataAsset_InputConfig;
 
 /**
  *
@@ -20,14 +24,23 @@ public:
 	AWarriorHeroCharacter();
 
 private:
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
-	class USpringArmComponent *CameraBoom;
+#pragma region Components
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
-	class UCameraComponent *FollowCamera;
+	USpringArmComponent *CameraBoom;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
+	UCameraComponent *FollowCamera;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Combat", meta = (AllowPrivateAccess = "true"))
+	UHeroCombatComponent *HeroCombatComponent;
+
+#pragma endregion
+
+#pragma region Input
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CharacterData", meta = (AllowPrivateAccess = "true"))
-	class UDataAsset_InputConfig *InputConfigDataAsset;
+	UDataAsset_InputConfig *InputConfigDataAsset;
+#pragma endregion
 
 	void Input_Move(const FInputActionValue &InputActionValue);
 	void Input_Look(const FInputActionValue &InputActionValue);
@@ -39,4 +52,7 @@ protected:
 
 	virtual void BeginPlay() override;
 	virtual void SetupPlayerInputComponent(class UInputComponent *PlayerInputComponent) override;
+
+public:
+	FORCEINLINE UHeroCombatComponent *GetHeroCombatComponent() const { return HeroCombatComponent; }
 };
