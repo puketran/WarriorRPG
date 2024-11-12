@@ -60,7 +60,7 @@ void AWarriorHeroCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInp
 
 void AWarriorHeroCharacter::Input_Move(const FInputActionValue &InputActionValue)
 {
-    UE_LOG(LogTemp, Log, TEXT("Input_Move: %s"), *InputActionValue.ToString());
+    // UE_LOG(LogTemp, Log, TEXT("Input_Move: %s"), *InputActionValue.ToString());
     const FVector2D MovementVector = InputActionValue.Get<FVector2D>();
 
     const FRotator MovementRotation(0.f, Controller->GetControlRotation().Yaw, 0.f);
@@ -98,9 +98,9 @@ void AWarriorHeroCharacter::PossessedBy(AController *NewController)
     Super::PossessedBy(NewController);
     if (WarriorAbilitySystemComponent && WarriorAttributeSet)
     {
-        const FString ASCText = FString::Printf(TEXT("Owner Actor: %s, AvatarActor: %s"), *WarriorAbilitySystemComponent->GetOwnerActor()->GetActorLabel(), *WarriorAbilitySystemComponent->GetAvatarActor()->GetActorLabel());
+        // const FString ASCText = FString::Printf(TEXT("Owner Actor: %s, AvatarActor: %s"), *WarriorAbilitySystemComponent->GetOwnerActor()->GetActorLabel(), *WarriorAbilitySystemComponent->GetAvatarActor()->GetActorLabel());
 
-        Debug::Print(TEXT("Ability system component valid. ") + ASCText, FColor::Green);
-        Debug::Print(TEXT("AttributeSet valid. ") + ASCText, FColor::Green);
+        // Debug::Print(TEXT("Ability system component valid. ") + ASCText, FColor::Green);
+        // Debug::Print(TEXT("AttributeSet valid. ") + ASCText, FColor::Green);
     }
 }
