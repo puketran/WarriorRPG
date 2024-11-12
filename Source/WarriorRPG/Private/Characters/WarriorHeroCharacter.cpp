@@ -15,6 +15,7 @@
 #include "WarriorDebugHelper.h"
 #include "AbilitySystem/WarriorAbilitySystemComponent.h"
 #include "AbilitySystem/WarriorAttributeSet.h"
+#include "DataAssets/StartUpData/DataAsset_StartUpDataBase.h"
 
 AWarriorHeroCharacter::AWarriorHeroCharacter()
 {
@@ -96,11 +97,12 @@ void AWarriorHeroCharacter::Input_Look(const FInputActionValue &InputActionValue
 void AWarriorHeroCharacter::PossessedBy(AController *NewController)
 {
     Super::PossessedBy(NewController);
-    if (WarriorAbilitySystemComponent && WarriorAttributeSet)
+    if (!CharacterStartUpData.IsNull())
     {
-        // const FString ASCText = FString::Printf(TEXT("Owner Actor: %s, AvatarActor: %s"), *WarriorAbilitySystemComponent->GetOwnerActor()->GetActorLabel(), *WarriorAbilitySystemComponent->GetAvatarActor()->GetActorLabel());
-
-        // Debug::Print(TEXT("Ability system component valid. ") + ASCText, FColor::Green);
-        // Debug::Print(TEXT("AttributeSet valid. ") + ASCText, FColor::Green);
+        if (UDataAsset_StartUpDataBase *loadedData = CharacterStartUpData.LoadSynchronous())
+        {
+            UE_LOG(LogTemp, Log, TEXT("CharacterStartUpData.LoadSynchronous"));
+            loadedData->GiveToAbilitySystemComponent(WarriorAbilitySystemComponent);
+        }
     }
 }

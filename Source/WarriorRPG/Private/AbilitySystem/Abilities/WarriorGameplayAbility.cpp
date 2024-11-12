@@ -11,9 +11,19 @@ void UWarriorGameplayAbility::OnGiveAbility(const FGameplayAbilityActorInfo *Act
 
     if (AbilityActivationPolicy == EWarriorAbilityActivationPolicy::OnGiven)
     {
-        if (ActorInfo && Spec.IsActive())
+        UE_LOG(LogTemp, Warning, TEXT("AbilityActivationPolicy OnGiven"));
+        if (ActorInfo && !Spec.IsActive())
         {
+            UE_LOG(LogTemp, Warning, TEXT("TryActivateAbility"));
             ActorInfo->AbilitySystemComponent->TryActivateAbility(Spec.Handle);
+        }
+        else if (!ActorInfo)
+        {
+            UE_LOG(LogTemp, Warning, TEXT("AbilityActivationPolicy OnGiven ActorInfo is nullptr"));
+        }
+        else if (Spec.IsActive())
+        {
+            UE_LOG(LogTemp, Warning, TEXT("AbilityActivationPolicy OnGiven Spec is not active"));
         }
     }
 }

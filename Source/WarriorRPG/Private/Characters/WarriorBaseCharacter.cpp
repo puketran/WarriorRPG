@@ -32,19 +32,9 @@ void AWarriorBaseCharacter::PossessedBy(AController *NewController)
 	if (WarriorAbilitySystemComponent)
 	{
 		WarriorAbilitySystemComponent->InitAbilityActorInfo(this, this);
-	}
 
-	// if (WarriorAbilitySystemComponent)
-	// {
-	// 	Debug::Print("WarriorAbilitySystemComponent! Set", FColor::Green);
-	// 	UE_LOG(LogTemp, Warning, TEXT("WarriorAbilitySystemComponent!"));
-	// }
-	// if (WarriorAttributeSet)
-	// {
-	// 	Debug::Print("WarriorAttributeSet! Set", FColor::Green);
-	// 	UE_LOG(LogTemp, Warning, TEXT("WarriorAttributeSet!"));
-	// }
-	// UE_LOG(LogTemp, Warning, TEXT("AWarriorBaseCharacter::PossessedBy!"));
+		ensureMsgf(!CharacterStartUpData.IsNull(), TEXT("Forgot to assign start up data to %s"), *GetName());
+	}
 }
 
 UAbilitySystemComponent *AWarriorBaseCharacter::GetAbilitySystemComponent() const
