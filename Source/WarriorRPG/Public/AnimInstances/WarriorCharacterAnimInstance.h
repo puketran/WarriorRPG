@@ -18,7 +18,7 @@ class WARRIORRPG_API UWarriorCharacterAnimInstance : public UWarriorBaseAnimInst
 	GENERATED_BODY()
 public:
 	virtual void NativeInitializeAnimation() override;
-	virtual void NativeThreadSafeUpdateAnimation(float DeltaSeconds);
+	virtual void NativeThreadSafeUpdateAnimation(float DeltaSeconds) override;
 
 protected:
 	UPROPERTY()

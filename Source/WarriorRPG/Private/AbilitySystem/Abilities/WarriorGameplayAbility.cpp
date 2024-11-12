@@ -7,7 +7,7 @@
 void UWarriorGameplayAbility::OnGiveAbility(const FGameplayAbilityActorInfo *ActorInfo, const FGameplayAbilitySpec &Spec)
 {
     Super::OnGiveAbility(ActorInfo, Spec);
-    UE_LOG(LogTemp, Warning, TEXT("UWarriorGameplayAbility::OnGiveAbility"));
+    UE_LOG(LogTemp, Warning, TEXT("UWarriorGameplayAbility::OnGiveAbility2222"));
 
     if (AbilityActivationPolicy == EWarriorAbilityActivationPolicy::OnGiven)
     {
