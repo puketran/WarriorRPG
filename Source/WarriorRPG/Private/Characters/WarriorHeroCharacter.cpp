@@ -101,10 +101,12 @@ void AWarriorHeroCharacter::Input_Look(const FInputActionValue &InputActionValue
 void AWarriorHeroCharacter::Input_AbilityInputPressed(FGameplayTag InInputTag)
 {
     UE_LOG(LogTemp, Log, TEXT("Input_AbilityInputPressed: %s"), *InInputTag.ToString());
+    WarriorAbilitySystemComponent->OnAbilityInputPressed(InInputTag);
 }
 void AWarriorHeroCharacter::Input_AbilityInputRelease(FGameplayTag InInputTag)
 {
     UE_LOG(LogTemp, Log, TEXT("Input_AbilityInputRelease: %s"), *InInputTag.ToString());
+    WarriorAbilitySystemComponent->OnAbilityInputReleased(InInputTag);
 }
 
 void AWarriorHeroCharacter::PossessedBy(AController *NewController)
