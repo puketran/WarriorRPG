@@ -60,6 +60,7 @@ void AWarriorHeroCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInp
     UWarriorInputComponent *WarriorInputComponent = CastChecked<UWarriorInputComponent>(PlayerInputComponent);
     WarriorInputComponent->BindNativeInputAction(InputConfigDataAsset, WarriorGameplayTags::InputTag_Move, ETriggerEvent::Triggered, this, &AWarriorHeroCharacter::Input_Move);
     WarriorInputComponent->BindNativeInputAction(InputConfigDataAsset, WarriorGameplayTags::InputTag_Look, ETriggerEvent::Triggered, this, &AWarriorHeroCharacter::Input_Look);
+    WarriorInputComponent->BindAbilityInputAction(InputConfigDataAsset, this, &AWarriorHeroCharacter::Input_AbilityInputPressed, &AWarriorHeroCharacter::Input_AbilityInputRelease);
 }
 
 void AWarriorHeroCharacter::Input_Move(const FInputActionValue &InputActionValue)
@@ -95,6 +96,15 @@ void AWarriorHeroCharacter::Input_Look(const FInputActionValue &InputActionValue
     {
         AddControllerPitchInput(LookAxisVector.Y);
     }
+}
+
+void AWarriorHeroCharacter::Input_AbilityInputPressed(FGameplayTag InInputTag)
+{
+    UE_LOG(LogTemp, Log, TEXT("Input_AbilityInputPressed: %s"), *InInputTag.ToString());
+}
+void AWarriorHeroCharacter::Input_AbilityInputRelease(FGameplayTag InInputTag)
+{
+    UE_LOG(LogTemp, Log, TEXT("Input_AbilityInputRelease: %s"), *InInputTag.ToString());
 }
 
 void AWarriorHeroCharacter::PossessedBy(AController *NewController)
